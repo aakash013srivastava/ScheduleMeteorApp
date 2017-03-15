@@ -1,0 +1,67 @@
+<head>
+  <title>FirstTestApp</title>
+</head>
+
+<body>
+</body>
+
+
+<template name="main">
+{{> navigation}}
+<br/><br/>
+{{> yield}}
+</template>
+
+<template name="login">
+<h3>Login</h3>
+<p>Login using your google accounts!</p>
+</template>
+
+<template name="home">
+<h3>Home</h3>
+</template>
+
+<template name="about">
+<h3>About Us</h3>
+</template>
+
+<template name="schedule">
+<h3>Schedules</h3>
+<form>
+	<label name="new_sch_lbl" for="new_sch">Add Event</label>
+	<input type="text" name="new_sch" id="add_event_field" required/>
+	<button type="button" class="btn btn-default" id="add_event_btn">Add </button>
+</form>
+<em><h4>List of tasks</h4></em>
+<ul>
+{{#each schedules}}
+	{{> schedulesList}}
+{{/each}}
+</ul>
+
+</template>
+
+<template name="schedulesList">
+
+<li>{{name}}</li>
+</template>
+
+<template name="navigation">
+<nav class="navbar navbar-default navbar-fixed-top">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="/">First Meteor App</a>
+		</div>
+		<ul class="nav navbar-nav">
+			<li><a href="{{pathFor route='home'}}">Home</a></li>
+			<li><a href="{{pathFor route='about'}}">About</a></li>
+			{{#if currentUser}}
+			<li><a href="{{pathFor route='schedule'}}">Schedules</a></li>
+			<li><a href="#" class='logout'>Logout</a></li>			
+			{{else}}
+			<li><a href="{{pathFor route='login'}}" id="loginClick">Login</a></li>
+			{{/if}}
+		</ul>
+	</div>
+</nav>
+</template>
